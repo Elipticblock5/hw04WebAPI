@@ -1,17 +1,22 @@
 // Initial working timer, need to add onclick, penalty and sytle. 
+//working on onclick function
 
-var sec = 45;
-var time = setInterval(myTimer, 1000);
 
-function myTimer() {
-    document.getElementById('timer').innerHTML = sec + "sec left";
-    sec--;
-    if (sec == -1) {
-        clearInterval(time);
-        alert("Time out!! :(");
+function start(){
+  var counter = 60;
+  setInterval(function() {
+    counter--;
+    if (counter >= 0) {
+      span = document.getElementById("count");
+      span.innerHTML = counter;
     }
-}
-
+    if (counter === 0) {
+        alert('sorry, out of time');
+        clearInterval(counter);
+    }
+  }, 1000);
+    
+};
 
 
 
