@@ -1,28 +1,92 @@
-body{
+#wrapper {
+	position: absolute;
+	left: 30%;
+	top: 20%;
+	width: 500px;
+	height: 500px;
+	border: 1px solid rgb(51, 26, 51);
+}
+#startTime {
+	background-color: rgb(51, 26, 51);
+	margin-left: 33%;
+	padding: 15px 32px;
 	font-size: 20px;
-	font-family: sans-serif;
-	color: #333;
+	color: white;
 }
-.question{
-	font-weight: 600;
+#questionsDiv {
+	margin: 20px;
 }
-.answers {
-  margin-bottom: 20px;
+
+#currentTime {
+	float: right;
 }
-.answers label{
-  display: block;
-}
-#submit{
-	font-family: sans-serif;
+
+#goBack {
+	background-color: rgb(51, 26, 51);
+	position: relative;
+	padding: 10px;
 	font-size: 20px;
-	background-color: #279;
-	color: #fff;
-	border: 0px;
-	border-radius: 3px;
-	padding: 20px;
-	cursor: pointer;
+	color: white;
+	top: 30%;
+	left: 55%;
+	width: auto;
+	text-align: center;
+	text-decoration: none;
+}
+
+
+
+#clear {
+	background-color: rgb(51, 26, 51);
+	position: relative;
+	padding: 10px;
+	font-size: 20px;
+	color: white;
+	top: 30%;
+	right: 5%;
+	text-align: center;
+}
+
+button {
+	border-radius: 8px;
+}
+
+textarea {
+	width: 90%;
+	margin: 20px;
+}
+
+#Submit {
+	background-color: rgb(51, 26, 51);
+	margin-left: 33%;
+	padding: 15px 32px;
+	font-size: 20px;
+	color: white;
+}
+
+label {
+	margin-right: 10px;
+}
+input {
 	margin-bottom: 20px;
+	width: 50%;
+	border: 1px solid lightgray;
 }
-#submit:hover{
-	background-color: #38a;
+
+h1 {
+	text-align: center;
+}
+
+li {
+	background-color: ;
+	margin-top: 10px;
+	padding: 5px 15px;
+	width: 80%;
+	font-size: 18px;
+	color: white;
+}
+
+#createDiv {
+	margin-top: 20px;
+	border-top: 1px solid lightgray;
 }
