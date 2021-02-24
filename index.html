@@ -1,23 +1,49 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>WebAPI Code Quiz</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="/hw04WebAPI/assets/css/style.css">
+         <!-- This is the title-->
+    
     </head>
+
     <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+
+            <!-- Link to highscores page when complete -->
+    <a href="HighScores.html">View Highscores</a>
+
+    <!-- wrapper for landing page-->
+    <div id="wrapper">
+
+        <!-- timer for uppper right of homepage-->
+        <div id="currentTime"></div>
+
+        <!-- dib for quiz questions-->
+
+        <div id="questionsDiv">
+            <h1>WebAPI Quiz Challenge</h1>
+            <p>Try to answer the following questions within the time limit. Incorrect
+                answers will penalize your time remaining by ten seconds!</p>
+            <ul id="choicesUl"></ul>
+            
+            <!-- Buttons -->
+            <button id="startTime">Start Quiz</button>
+        </div>
+
+    </div>
+
         
-        <script src="" async defer></script>
+
+    
+
+    
+        
+        <script src="./assets/js/script.js" async defer></script>
     </body>
 </html>
 
