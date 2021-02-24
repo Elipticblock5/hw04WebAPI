@@ -12,51 +12,23 @@
     
     </head>
 
-<body>
-
-    <header>
-
-            <!-- Link to highscores page when complete -->
-        <div class= scores>
-             <a href="HighScores.html">View Highscores</a>
-        </div>
-        <div id=timer>
-            Time: 75
-        </div>
-    </header>
-    
-    <!-- container for landing page-->
-    <section id="start-container" class="start quiz">
-        <h1> Welcome to the Quiz</h1>
-            <p>
-                You have 75 seconds to try to get the highest score by answering five
-                series of questions. Incorrect answers will penalize your
-                time by ten seconds. Your total score will be your time after you
-                answer the last question. Click start when you are ready.
-            </p>
-            <div class="controls">
-                <button id="start-btn" class="start=btn">Start Quiz</button>
+    <body>
+        <body>
+            <div class="container">
+              <h1 class="welcome">Javascript Quiz</h1>
+              <button id="start-btn">Start</button>
+              <h2 id="countdown"></h2>
+              <p id="main"></p>
             </div>
-       
-        </section>   
-
-    <!-- div for quiz questions-->
-
-       <section id="score-container" class="hide">
-           <form id="submit form">
-               <h3 id="your-score"></h3>
-               
-           </form>
-       </section>
-   
-
-        
-
+            <script src="./assets/js/script.js"></script>
+          </body>
     
 
     
         
-        <script src="./assets/js/script.js" async defer></script>
+        <script src="./assets/js/script.js"></script>
+    
+    
     </body>
 </html>
 

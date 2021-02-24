@@ -1,61 +1,56 @@
-// Initial working timer, need to add onclick, penalty and sytle. 
-//working on onclick function
-//countdown and alrt working
+var timerEl = document.getElementById('countdown');
+var mainEl = document.getElementById('main');
+var startBtn = document.getElementById('start-btn');
 
+var message =
+  'You are out of time';
+var words = message.split(' ');
 
-function startTimer(){
-  var counter = 45;
-  setInterval(function() {
-    counter--;
-    if (counter >= 0) {
-      span = document.getElementById("count");
-      span.innerHTML = counter;
-    }
-    if (counter === 0) {
-        alert('sorry, out of time');
-        clearInterval(counter);
+// Timer that counts down from 5
+function countdown() {
+  var timeLeft = 75;
+ // startn button redo from lesson 4 solved examples
+  // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+  var timeInterval = setInterval(function() {
+    // As long as the `timeLeft` is greater than 1
+    if (timeLeft > 1) {
+      // Set the `textContent` of `timerEl` to show the remaining seconds
+      timerEl.textContent = timeLeft + ' seconds remaining';
+      // Decrement `timeLeft` by 1
+      timeLeft--;
+    } else if (timeLeft === 1) {
+      // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
+      timerEl.textContent = timeLeft + ' second remaining';
+      timeLeft--;
+    } else {
+      // Once `timeLeft` gets to 0, set `timerEl` to an empty string
+      timerEl.textContent = '';
+      // Use `clearInterval()` to stop the timer
+      clearInterval(timeInterval);
+      // Call the `displayMessage()` function
+      displayMessage();
     }
   }, 1000);
 }
-function start()
-{
-    document.getElementById("count").style="color:green";
-    startTimer();
-};
 
-//adding initial js question array
+// Displays the message one word at a time
+function displayMessage() {
+  var wordCount = 0;
 
-var jsQuestions = [
-  {
-    title: "Commonly used data types DO NOT include:",
-    choices: ["strings", "booleans", "alerts", "numbers"],
-    answer: "alerts"
-  },
-  {
-    title: "The condition in an if / else statement is enclosed within ____.",
-    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-    answer: "parentheses"
-  },
-  {
-    title: "Is JavaScript fun to work with?",
-    choices: ["No", "Sometimes", "What is Javascript", "Not just yes, but HELL YES!"],
-    answer: "Not just yes, but HELL YES!"
-  },
-  {
-    title: "DOM is an abreviation for ____",
-    choices: ["Data Object Mode", "Dumb Old Man", "Document Object Model", "Dutle Opo Mipsy"],
-    answer: "Document Object Model"
-  },
-  {
-    title: "JavaScript is Textile Mark Up (TML) version of Java?",
-    choices: ["True", "False"],
-    answer: "False"
-  },
-  {
-    title: "JavaScript is strongly typed language",
-    choices: ["True", "False"],
-    answer: "False"
-  }
-];
+  // Uses the `setInterval()` method to call a function to be executed every 300 milliseconds
+  var msgInterval = setInterval(function() {
+    if (words[wordCount] === undefined) {
+      clearInterval(msgInterval);
+    } else {
+      mainEl.textContent = words[wordCount];
+      wordCount++;
+    }
+  }, 300);
+}
+
+startBtn.onclick = countdown;
+
+
+
 
 
