@@ -12,35 +12,43 @@
     
     </head>
 
-    <body>
+<body>
+
+    <header>
 
             <!-- Link to highscores page when complete -->
-    <a href="HighScores.html">View Highscores</a>
-
-    <!-- wrapper for landing page-->
-    <div id="wrapper">
-
-       
-        
-
-        <!-- div for quiz questions-->
-
-        <div id="questionsDiv">
-            <h1>WebAPI Quiz Challenge</h1>
-            <p>Try to answer the following questions within the time limit. Incorrect
-                answers will penalize your time remaining by ten seconds!</p>
-            <ul id="choicesUl"></ul>
-
-            <!-- Buttons -->
-            <span id="count">45</span> seconds
-            <br>
-            <button onclick="start()">
-            START QUIZ
-            </button>
-            
+        <div class= scores>
+             <a href="HighScores.html">View Highscores</a>
         </div>
+        <div id=timer>
+            Time: 75
+        </div>
+    </header>
+    
+    <!-- container for landing page-->
+    <section id="start-container" class="start quiz">
+        <h1> Welcome to the Quiz</h1>
+            <p>
+                You have 75 seconds to try to get the highest score by answering five
+                series of questions. Incorrect answers will penalize your
+                time by ten seconds. Your total score will be your time after you
+                answer the last question. Click start when you are ready.
+            </p>
+            <div class="controls">
+                <button id="start-btn" class="start=btn">Start Quiz</button>
+            </div>
+       
+        </section>   
 
-    </div>
+    <!-- div for quiz questions-->
+
+       <section id="score-container" class="hide">
+           <form id="submit form">
+               <h3 id="your-score"></h3>
+               
+           </form>
+       </section>
+   
 
         
 
