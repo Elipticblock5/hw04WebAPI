@@ -2,44 +2,38 @@ const quizContainer = document.getElementById('quiz');
 const resultsContainer = document.getElementById('results');
 const submitButton = document.getElementById('submit');
 
+var questions = [
+  {
+      title: "Javascript can run in?",
+      choices: ["browser", "CPU", "low level memory", "earphones"],
+      answer: "browser"
+  },
+  {
+      title: "The inventor of Javascript is?",
+      choices: ["Brad Eichen", "Bill Gates", "Tec Cruz", "Steve Jobs"],
+      answer: "Brad Eichen"
+  },
+  {
+      title: "A goot tool for debugging javascipt is:",
+      choices: ["Javascript", "terminal / bash", "for loops", "console log"],
+      answer: "console log"
+  },
 
-function buildQuiz(){}
+];
 
-function showResults(){}
 
-// display quiz right away
-buildQuiz();
+var currentTime = document.querySelector("#currentTime");
+var timer = document.querySelector("#startTime");
+var questionsDiv = document.querySelector("#quizQuestions");
+var wrapper = document.querySelector("#wrapper");
 
-// on submit, show results
-submitButton.addEventListener('click', showResults);
 
-const myQuestions = [
-    {
-      question: "Who invented JavaScript?",
-      answers: {
-        a: "Douglas Crockford",
-        b: "Sheryl Sandberg",
-        c: "Brendan Eich"
-      },
-      correctAnswer: "c"
-    },
-    {
-      question: "Which one of these is a JavaScript tag?",
-      answers: {
-        a: "html",
-        b: "img",
-        c: "funtcion"
-      },
-      correctAnswer: "c"
-    },
-    {
-      question: "Which tool can you use to view console logs in Chrome?",
-      answers: {
-        a: "Angular",
-        b: "jQuery",
-        c: "RequireJS",
-        d: "Chrome DevTools"
-      },
-      correctAnswer: "d"
-    }
-  ];
+var secondsLeft = 60;
+
+var holdInterval = 0;
+// Holds penalty time
+var penalty = 10;
+// Creates new element
+var ulCreate = document.createElement("ul");
+
+
