@@ -37,3 +37,25 @@ var penalty = 10;
 var ulCreate = document.createElement("ul");
 
 
+// show useer timer display
+timer.addEventListener("click", function () {
+
+    // checking zero because its originally set to zero
+    
+    if (holdInterval === 0) {
+        holdInterval = setInterval(function () {
+            secondsLeft--;
+            currentTime.textContent = "Time: " + secondsLeft;
+
+            if (secondsLeft <= 0) {
+                clearInterval(holdInterval);
+                allDone();
+                currentTime.textContent = "Time's up!";
+            }
+        }, 1000);
+    }
+    render(questionIndex);
+});
+
+
+
