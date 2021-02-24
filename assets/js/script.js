@@ -19,11 +19,8 @@ function startTimer(){
 }
 function start()
 {
-    document.getElementById("count").style="color:green;";
+    document.getElementById("count").style="color:green";
     startTimer();
-};d
-    
-
-
+};
 
 
