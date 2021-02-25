@@ -1,39 +1,57 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>WebAPI Code Quiz</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/hw04WebAPI/assets/css/style.css">
-         <!-- This is the title-->
-    
-    </head>
 
-    <body>
-        <body>
-            <div class="quiz">
-              <h1 class="welcome">Javascript Quiz</h1>
-              <button id="start-btn">Start</button>
-              <h2 id="countdown"></h2>
-              <p id="main"></p>
-            </div>
-            <div class="results">
-              <button id="submit">Submit Quiz</button>
-              <div id="results"></div>
-            </div>
-            
-          
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>WebAPI Code Quiz</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/hw04WebAPI/assets/css/style.css">
+  <!-- This is the title-->
+
+</head>
+
+<body>
+
+  <body>
+    <section id="start-container" class="start-quiz">
+      <h1 class="welcome">Javascript Quiz</h1>
+      <button id="start-btn">Start</button>
+      <h2 id="countdown"></h2>
+      <p id="main"></p>
+      </div>
+      <div class="results">
+        <button id="submit">Submit Quiz</button>
+        <div id="results"></div>
+    </section>
+
+    <section id="question-container" class="hide">
+      <h1 id="question">Question</h1>
+      <div id="answer-buttons" class="btn-grid">
+        <button class="btn">Answer 1</button>
+        <button class="btn">Answer 2</button>
+        <button class="btn">Answer 3</button>
+        <button class="btn">Answer 4</button>
+      </div>
+      <h2 id="check-answer" class="correct-wrong hide"></h2>
+      <div class="controls">
+        <button id="next-btn" class="next-btn hide">Next</button>
+      </div>
+    </section>
 
     
-        
-        <script src="./assets/js/script.js"></script>
-    
-    
-    </body>
+
+    <section="score-container" class="hide">
+
+      </section>
+
+
+
+      <script src="./assets/js/script.js"></script>
+
+
+  </body>
+
 </html>
-
-    
-
