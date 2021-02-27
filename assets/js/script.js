@@ -13,6 +13,46 @@ var message =
   'You are out of time';
 var words = message.split(' ');
 
+// add event listener for start button
+
+document.getElementById("start-btn").addEventListener("click", function() {
+  var quiz =document.getElementById("questions");
+});
+
+document.getElementById("question-container").style.display = "none";
+document.getElementById("highscores-container").style.display = "none";
+
+
+
+// hide hidden elements function
+function ShowQuiz() {
+  var T = document.getElementById("question-container");
+  T.style.display = "block";  // <-- Set it to block
+}
+
+// starting question array 4 questions
+var questions = 
+[
+  {
+    question: "What is the capital of United Kingdom?",
+    choices: ["Manchester", "Birmingham", "London", "Birmingham"],
+    answer: 2
+  },
+  
+  {
+    question: "What is the capital of United States?",
+    choices: ["California", "WashingtonDC", "Miami", "Florida"],
+    answer: 1
+  }
+
+
+  
+];
+
+
+
+
+
 // Timer that counts down from 5
 function countdown() {
   var timeLeft = 75;
