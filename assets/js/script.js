@@ -7,7 +7,7 @@
 
 var timerEl = document.getElementById('countdown');
 var mainEl = document.getElementById('main');
-var startBtn = document.getElementById('start-btn');
+var startBtn = document.getElementById('startBtn');
 
 var message =
   'You are out of time';
@@ -15,20 +15,23 @@ var words = message.split(' ');
 
 // add event listener for start button
 
-document.getElementById("start-btn").addEventListener("click", function() {
+document.getElementById("startBtn").addEventListener("click", function() {
   var quiz =document.getElementById("questions");
 });
 
-document.getElementById("question-container").style.display = "none";
-document.getElementById("highscores-container").style.display = "none";
+// worked with tutor Sierra Chapman on hide element problem.
+
+document.getElementById("questContainer").style.display = "none";
+document.getElementById("highScorecontainer").style.display = "none";
 
 
 
-// hide hidden elements function
-function ShowQuiz() {
-  var T = document.getElementById("question-container");
-  T.style.display = "block";  // <-- Set it to block
-}
+
+
+
+
+
+
 
 // starting question array 4 questions
 var questions = 
@@ -53,7 +56,7 @@ var questions =
 
 
 
-// Timer that counts down from 5
+// Timer that counts down from 75  Lesson 4 solved problems. 
 function countdown() {
   var timeLeft = 75;
  // startn button redo from lesson 4 solved examples
@@ -96,6 +99,10 @@ function displayMessage() {
 }
 
 startBtn.onclick = countdown;
+
+
+
+
 
 
 
