@@ -116,9 +116,6 @@ function selectAnswer(e) {
      startButton.classList.remove("hide")
      saveScore();
    }
-
-
-  
 };
 
 
