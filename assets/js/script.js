@@ -1,3 +1,31 @@
+
+var timerEl = document.getElementById('countdown');
+var mainEl = document.getElementById('main');
+var startBtn = document.getElementById('startBtn');
+var timeLeft = 75;
+var timerID;
+var nextBtn = document.getElementById("nextBtn");
+var queContainerEl = document.getElementById("questContainer");
+var startContainerEl = document.getElementById("startContainer");
+var questionEl = document.getElementById("question");
+var answerButtonsEl = document.getElementById("answerButtons");
+var checkAnswerEl = document.getElementById("checkAnswer");
+var viewHighScores = document.getElementById("highscores-link");
+var submitButton = document.getElementById("submitBtn");
+var clearScoreButton = document.getElementById("clearBtn");
+var initialsField = document.getElementById("playerName");
+var restartButton = document.getElementById("restartBtn");
+var scoreField = document.getElementById("playerScore");
+var scores = JSON.parse(localStorage.getItem("scores")) || [];
+
+
+
+
+
+
+
+
+
 //add build quiz function
 
 //add show results function
@@ -5,9 +33,6 @@
 
 
 
-var timerEl = document.getElementById('countdown');
-var mainEl = document.getElementById('main');
-var startBtn = document.getElementById('startBtn');
 
 var message =
   'You are out of time';
@@ -56,7 +81,7 @@ var questions =
 
 
 
-// Timer that counts down from 75  Lesson 4 solved problems. 
+// Timer that counts down from 75  Lesson 4 solved problems.
 function countdown() {
   var timeLeft = 75;
  // startn button redo from lesson 4 solved examples
