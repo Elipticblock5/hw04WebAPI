@@ -18,12 +18,12 @@ var questions = [
         ]
     },
     { 
-        question: "How to write an IF statement for executing some code if 'i' is NOT equal to 9?", 
+        question: "Is the Javascript Quiz O' Doom the greatest text on the internet?", 
         answers: [
-            { text: "if (i != 9)", correct: true },
-            { text: "if i =! 9", correct: false },
-            { text: "if (i <> 9)", correct: false },
-            { text: "if (i !=== 9)", correct: false }
+            { text: "yes", correct: true },
+            { text: "no", correct: false },
+            { text: "all others pale in comparison", correct: true },
+            { text: "without a doubt", correct: true }
         ]
     },
     { 
