@@ -10,10 +10,23 @@
     <title>Javascript Doom Quiz</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
+
+    <!-- Header with high score line and doom clock. -->
     <header>
+
+      <div class="scores">
+        <a id="highscores-page">View High Scores</a>
+      </div>
+      <div id="timer" class ="timer">
+        Doom Clock: 75
+      </div>
+
+    </header>
+
+      <!-- Start Box -->
       <section id="start-box" class="start=quiz">
         <h1>Welcome to the Javascript Quiz O' Doom</h1>
         <p>
@@ -24,12 +37,56 @@
           Doom" when you are ready.
         </p>
         <div class="controls">
-          <button id="begin-btn" class="begin-btn">Begin the Doom</button>
+          <button id="begin-btn" class="begin-btn">Begin Your Doom</button>
         </div>
-        <controls></controls>
+        
       </section>
-    </header>
 
-    <script src="" async defer></script>
+      <!-- Question Box, hide at beginning -->
+      <section id="question-box" class ="hide">
+        <h1 id="question">Question</h1>
+        <div id="answer-buttons" class="btn-grid">
+          <button class="btn">Answer 1</button>
+          <button class="btn">Answer 2</button>
+          <button class="btn">Answer 3</button>
+          <button class="btn">Answer 4</button>
+        </div>
+        <h2 id="check-answer" class="correct-notcorrect hide"></h2>
+        <div class="controls">
+          <button id="next-btn" class="next-tn hide">Next Impending Doom</button>
+        </div>
+        
+      </section>
+
+      <!-- Score Box, hide at beginning -->
+      <section id="score-box" class="hide">
+        <form id="submit-form">
+          <h3 id="your-score"></h3>
+          <label id="initials-label">Enter your initials to see how close to DOOM you were</label>
+          <input type="text" id="initials-field" maxlength="3" placeholder="Enter your initials" />
+          <button id="submit-btn">Find your Score</button>
+        </form>
+      </section>
+
+      <!-- High Scores Box-->
+      <section id="highscores" class="highscores-box hide">
+        <div id="high-scores">
+          <h1 class="high-scores">The DOOM Leaders</h1>
+            <div id="highscore" class="highscore highscore-list">
+
+            </div>
+            <div class="controls">
+              <button id="restart-btn">DOOM YOURSELF AGAIN</button>
+              <button id="clear-btn">Clear Scores</button>
+
+            </div>
+          
+        </div>
+      </section>
+    
+
+    <script src="/assets/js/script.js"></script>
+    <script src="./assets/js/questions.js"></script>
+
   </body>
 </html>
