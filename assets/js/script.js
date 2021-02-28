@@ -172,8 +172,8 @@ var loadScores = function () {
   console.log(savedScores)
 
   savedScores.forEach(score => {
-      initialsField.innerText = score.initials
-      scoreField.innerText = score.score
+      initialsBox.innerText = score.initials
+      scoreDoom.innerText = score.score
   })
 };
 
@@ -192,7 +192,7 @@ function showHighScores(initials) {
       scores.push(score)
   }
 
-  var highScoreEl = document.getElementById("highscores");
+  var highScoreEl = document.getElementById("highscore");
   highScoreEl.innerHTML = "";
 
   for (i = 0; i < scores.length; i++) {
