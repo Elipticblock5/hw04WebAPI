@@ -1,35 +1,36 @@
-// initial variables
+
 var timeLeft = 75;
 var timerID
 var timerEl = document.getElementById("timer");
-var startButton = document.getElementById("start-btn");
+var startButton = document.getElementById("begin-btn");
 var nextButton = document.getElementById("next-btn");
 var startBoxEl = document.getElementById("start-box");
 var questionBoxEl = document.getElementById("question-box");
 var questionEl = document.getElementById("question");
-var answerButtonsEl = getElementById("answer-buttons");
+var answerButtonsEl = document.getElementById("answer-buttons");
 var checkAnswerEl = document.getElementById("check-answer");
-var viewHighScores = document.getElementById("highscores-link");
+var viewHighScores = document.getElementById("highscores");
 var submitButton = document.getElementById("submit-btn");
-var clearScore = document.getElementById("clear-btn");
+var clearDoomBtn = document.getElementById("clear-btn");
 var initialsBox = document.getElementById("player-name");
 var restartDoom = document.getElementById("restart-btn");
 var scoreDoom = document.getElementById("player-score");
+var scores = JSON.parse(localStorage.getItem("scores")) || [];
 
 
 
 
-var randomQuestions, currentQuestions
+var randomQuestions, currentQuestionsIndex
 
 //start button to get first question
 startButton.addEventListener("click", startGame);
 nextButton.addEventListener("click", () => {
-  currentQuestions++
+  currentQuestionsIndex++
   setNextQuestion()
 });
 
 //  doom timer
-function doomClock() {
+function timeTick() {
   timeLeft--;
   timerEl.textContent = timeLeft + " until DOOM";
   if (timeLeft <= 0) {
@@ -39,11 +40,11 @@ function doomClock() {
 
 //  doom quiz starter
 
-function doomQuiz() {
+function startGame() {
   timerID = setInterval(timeTick, 1000);
   startBoxEl.classList.add("hide");
   randomQuestions = questions.sort(() => Math.random() - .5)
-  currentQuestions = 0
+  currentQuestionsIndex = 0
   questionBoxEl.classList.remove("hide");
 
   timeTick();
@@ -54,7 +55,7 @@ function doomQuiz() {
 
 function setNextQuestion() {
   resetState();
-  showQuestion(randomQuestions[currentQuestions]);
+  showQuestion(randomQuestions[currentQuestionsIndex]);
 }
 
 // dynamic to display questions
@@ -109,7 +110,7 @@ function selectAnswer(e) {
      setStatusClass(button, button.dataset.correct)
    })
 
-   if (randomQuestions.length > currentQuestions +1) {
+   if (randomQuestions.length > currentQuestionsIndex +1) {
      nextButton.classList.remove("hide")
      checkAnswerEl.classList.remove("hide")
    } else {
@@ -119,8 +120,122 @@ function selectAnswer(e) {
 };
 
 
+// check answers, change button colors
+function setStatusClass(element, correct) {
+  clearStatusClass(element)
+  if (correct) {
+      element.classList.add("correct");
+  } else {
+      element.classList.add("wrong");
+  }
+};
+
+// class clear
+
+function clearStatusClass(element) {
+  element.classList.remove("correct");
+  element.classList.remove("wrong");
+};
+
+// saving score to local storag
+function saveScore() {
+  clearInterval(timerID);
+  timerEl.textContent = "Time: " + timeLeft;
+  setTimeout(function () {
+      //localStorage.setItem("scores", JSON.stringify(scores));
+      questionBoxEl.classList.add("hide");
+      document.getElementById("score-box").classList.remove("hide");
+      document.getElementById("your-score").textContent = "Your final score is " + timeLeft;
+
+  }, 2000)
+};
 
 
+
+var loadScores = function () {
+
+  // get score from local storhage
+
+  if (!savedScores) {
+      return false;
+  }
+
+  // convert scores with JSON into array
+
+  savedScores = JSON.parse(savedScores);
+  var initials = document.querySelector("#initials-field").value;
+  var newScore = {
+      score: timeLeft,
+      initials: initials
+  }
+  savedScores.push(newScore);
+  console.log(savedScores)
+
+  savedScores.forEach(score => {
+      initialsField.innerText = score.initials
+      scoreField.innerText = score.score
+  })
+};
+
+
+// show highschores
+
+function showHighScores(initials) {
+  document.getElementById("highscores").classList.remove("hide")
+  document.getElementById("score-box").classList.add("hide");
+  startBoxEl.classList.add("hide");
+  questionBoxEl.classList.add("hide");
+  if (typeof initials == "string") {
+      var score = {
+          initials, timeLeft
+      }
+      scores.push(score)
+  }
+
+  var highScoreEl = document.getElementById("highscores");
+  highScoreEl.innerHTML = "";
+
+  for (i = 0; i < scores.length; i++) {
+      var div1 = document.createElement("div");
+      div1.setAttribute("class", "name-div");
+      div1.innerText = scores[i].initials;
+      var div2 = document.createElement("div");
+      div2.setAttribute("class", "score-div");
+      div2.innerText = scores[i].timeLeft;
+
+      highScoreEl.appendChild(div1);
+      highScoreEl.appendChild(div2);
+  }
+
+  localStorage.setItem("scores", JSON.stringify(scores));
+
+};
+
+
+// high schore link load
+
+viewHighScores.addEventListener("click", showHighScores);
+
+
+submitButton.addEventListener("click", function (event) {
+    event.preventDefault()
+    var initials = document.querySelector("#initials-field").value;
+    showHighScores(initials);
+});
+
+
+// reload the page
+restartDoom.addEventListener("click", function () {
+    window.location.reload();
+});
+
+
+// clear local storage
+
+clearDoomBtn.addEventListener("click", function () {
+  localStorage.clear();
+  document.getElementById("highscores").innerHTML = "";
+});
 
 
 
