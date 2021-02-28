@@ -3,7 +3,7 @@ var questions = [
         question: "Who invented Javascript?", 
         answers: [
             { text: "Bill Gates", correct: false },
-            { text: "Brad Eichen" , correct: true },
+            { text: "Brendan Eich" , correct: true },
             { text: "Al Gore", correct: false },
             { text: "George Clooney", correct: false }
         ]
