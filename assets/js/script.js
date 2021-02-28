@@ -8,7 +8,7 @@ var questionBoxEl = document.getElementById("question-box");
 var questionEl = document.getElementById("question");
 var answerButtonsEl = document.getElementById("answer-buttons");
 var checkAnswerEl = document.getElementById("check-answer");
-var doomHighScores = document.getElementById("highscores");
+var doomHighScores = document.getElementById("doomscores");
 var submitDoom = document.getElementById("submit-btn");
 var clearDoomBtn = document.getElementById("clear-btn");
 var initialsBox = document.getElementById("player-name");
@@ -26,12 +26,12 @@ nextDoomButton.addEventListener("click", () => {
   gotoNextDoom();
 });
 
-//  doom timer
+//  DOOM timer
 function doomTimer() {
   timeLeft--;
   doomTimerEl.textContent = timeLeft + " until DOOM";
   if (timeLeft <= 0) {
-    saveScore();
+    saveDoomScore();
   }
 }
 
@@ -48,10 +48,10 @@ function startDoom() {
   gotoNextDoom();
 }
 
-// next question function
+// next doom question function
 
 function gotoNextDoom() {
-  resetState();
+  resetDoom();
   showQuestion(doomQuestions[currentQuestions]);
 }
 
@@ -67,13 +67,13 @@ function showQuestion(question) {
       button.dataset.correct = answer.correct;
     }
 
-    button.addEventListener("click", selectAnswer);
+    button.addEventListener("click", selectDoomAnswer);
     answerButtonsEl.appendChild(button);
   });
 }
 
 // reset questions
-function resetState() {
+function resetDoom() {
   nextDoomButton.classList.add("hide");
   checkAnswerEl.classList.add("hide");
   while (answerButtonsEl.firstChild) {
@@ -81,16 +81,16 @@ function resetState() {
   }
 }
 
-// answer selection function
+// answer selection correct, lose 10 seconds if wrong.
 
-function selectAnswer(e) {
-  var selectedButton = e.target;
-  var correct = selectedButton.dataset.correct;
+function selectDoomAnswer(e) {
+  var doomSelection = e.target;
+  var correct = doomSelection.dataset.correct;
 
   if (correct) {
-    checkAnswerEl.innerHTML = "You got it right and avoided DOOM";
+    checkAnswerEl.innerHTML = "You got it right and avoided MASSIVE DOOM!";
   } else {
-    checkAnswerEl.innerHTML = "DOOM, you lose 10 seconds";
+    checkAnswerEl.innerHTML = "DOOM yourself!, you are 10 seconds closer to DOOM!";
     if (timeLeft <= 10) {
       timeLeft = 0;
     } else {
@@ -107,7 +107,7 @@ function selectAnswer(e) {
     checkAnswerEl.classList.remove("hide");
   } else {
     startDoomButton.classList.remove("hide");
-    saveScore();
+    saveDoomScore();
   }
 }
 
@@ -131,7 +131,7 @@ function clearcorrectWrongClass(element) {
 // saving score to local storage
 
 
-function saveScore() {
+function saveDoomScore() {
   clearInterval(timerID);
   doomTimerEl.textContent = "Time " + timeLeft;
   setTimeout(function () {
@@ -176,7 +176,7 @@ var loadDoomScores = function () {
 // show high scores
 
 function showDoomScores(initials) {
-  document.getElementById("highscores").classList.remove("hide");
+  document.getElementById("doomscores").classList.remove("hide");
   document.getElementById("score-box").classList.add("hide");
   startBoxEl.classList.add("hide");
   questionBoxEl.classList.add("hide");
@@ -225,5 +225,5 @@ restartDoom.addEventListener("click", function () {
 
 clearDoomBtn.addEventListener("click", function () {
   localStorage.clear();
-  document.getElementById("highscores").innerHTML = "";
+  document.getElementById("doomscores").innerHTML = "";
 });
