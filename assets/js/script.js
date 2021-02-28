@@ -1,5 +1,5 @@
-var timeLeft = 75;
-var timerID;
+var doomTimeLeft = 75;
+var doomTimerID;
 var doomTimerEl = document.getElementById("timer");
 var startDoomButton = document.getElementById("begin-btn");
 var nextDoomButton = document.getElementById("next-btn");
@@ -16,32 +16,33 @@ var restartDoom = document.getElementById("restart-btn");
 var scoreDoom = document.getElementById("player-score");
 var scores = JSON.parse(localStorage.getItem("scores")) || [];
 
-var doomQuestions, currentQuestions;
+var doomQuestions, currentDoomQuestions;
 
 //start button to get first question
 
 startDoomButton.addEventListener("click", startDoom);
 nextDoomButton.addEventListener("click", () => {
-  currentQuestions++;
+  currentDoomQuestions++;
   gotoNextDoom();
 });
 
 //  DOOM timer
+
 function doomTimer() {
-  timeLeft--;
-  doomTimerEl.textContent = timeLeft + " until DOOM";
-  if (timeLeft <= 0) {
+  doomTimeLeft--;
+  doomTimerEl.textContent = doomTimeLeft + " seconds until you are DOOMED...DOOMED I TELL YOU!!";
+  if (doomTimeLeft <= 0) {
     saveDoomScore();
   }
 }
 
-//  doom quiz starter
+//  DOOM quiz starter
 
 function startDoom() {
-  timerID = setInterval(doomTimer, 1000);
+  doomTimerID = setInterval(doomTimer, 1000);
   startBoxEl.classList.add("hide");
   doomQuestions = questions.sort(() => Math.random() - 0.5);
-  currentQuestions = 0;
+  currentDoomQuestions = 0;
   questionBoxEl.classList.remove("hide");
 
   doomTimer();
@@ -52,7 +53,7 @@ function startDoom() {
 
 function gotoNextDoom() {
   resetDoom();
-  showQuestion(doomQuestions[currentQuestions]);
+  showQuestion(doomQuestions[currentDoomQuestions]);
 }
 
 // dynamic to display questions
@@ -88,13 +89,13 @@ function selectDoomAnswer(e) {
   var correct = doomSelection.dataset.correct;
 
   if (correct) {
-    checkAnswerEl.innerHTML = "You got it right and avoided MASSIVE DOOM!";
+    checkAnswerEl.innerHTML = "You got it right and avoided impending MASSIVE DOOM!";
   } else {
-    checkAnswerEl.innerHTML = "DOOM yourself!, you are 10 seconds closer to DOOM!";
-    if (timeLeft <= 10) {
-      timeLeft = 0;
+    checkAnswerEl.innerHTML = "WRONG!! You just DOOMED yourself! You're 10 seconds closer to DOOM!!";
+    if (doomTimeLeft <= 10) {
+      doomTimeLeft = 0;
     } else {
-      timeLeft -= 10;
+      doomTimeLeft -= 10;
     }
   }
 
@@ -102,7 +103,7 @@ function selectDoomAnswer(e) {
     correctWrongClass(button, button.dataset.correct);
   });
 
-  if (doomQuestions.length > currentQuestions + 1) {
+  if (doomQuestions.length > currentDoomQuestions + 1) {
     nextDoomButton.classList.remove("hide");
     checkAnswerEl.classList.remove("hide");
   } else {
@@ -132,14 +133,14 @@ function clearcorrectWrongClass(element) {
 
 
 function saveDoomScore() {
-  clearInterval(timerID);
-  doomTimerEl.textContent = "Time " + timeLeft;
+  clearInterval(doomTimerID);
+  doomTimerEl.textContent = "Time " + doomTimeLeft;
   setTimeout(function () {
     // string the scores
     questionBoxEl.classList.add("hide");
     document.getElementById("score-box").classList.remove("hide");
     document.getElementById("your-score").textContent =
-      "Your javaScript Quiz O' Doom score is: " + timeLeft;
+      "Your JavaScript Quiz O' Doom score is: " + doomTimeLeft;
   }, 2000);
 }
 
@@ -161,7 +162,7 @@ var loadDoomScores = function () {
   savedScores = JSON.parse(savedScores);
   var initials = document.querySelector("#initials-field").value;
   var newScore = {
-    score: timeLeft,
+    score: doomTimeLeft,
     initials: initials,
   };
   savedScores.push(newScore);
@@ -183,13 +184,13 @@ function showDoomScores(initials) {
   if (typeof initials == "string") {
     var score = {
       initials,
-      timeLeft,
+      doomTimeLeft,
     };
     scores.push(score);
   }
 
-  var highScoreEl = document.getElementById("highscore");
-  highScoreEl.innerHTML = "";
+  var highDoomScoreEl = document.getElementById("doomscore");
+  highDoomScoreEl.innerHTML = "";
 
   for (i = 0; i < scores.length; i++) {
     var div1 = document.createElement("div");
@@ -197,16 +198,16 @@ function showDoomScores(initials) {
     div1.innerText = scores[i].initials;
     var div2 = document.createElement("div");
     div2.setAttribute("class", "score-div");
-    div2.innerText = scores[i].timeLeft;
+    div2.innerText = scores[i].doomTimeLeft;
 
-    highScoreEl.appendChild(div1);
-    highScoreEl.appendChild(div2);
+    highDoomScoreEl.appendChild(div1);
+    highDoomScoreEl.appendChild(div2);
   }
 
   localStorage.setItem("scores", JSON.stringify(scores));
 }
 
-// high score  link load
+// high score page  link load
 
 doomHighScores.addEventListener("click", showDoomScores);
 

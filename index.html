@@ -8,13 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
+
   <body>
     <!-- Header with high score line and doom clock. -->
     <header>
       <div class="scores">
-        <a id="doomscores-page">View Highest Javasript Quiz O' DOOM Scores</a>
+        <a id="doomscores-page">View Highest Javascript Quiz O' DOOM Scores</a>
       </div>
-      <div id="timer" class="timer">Doom Clock: 75</div>
+      <div id="timer" class="timer">Your Countdown to DOOM!!: 75</div>
     </header>
 
     <!-- Start Box -->
@@ -22,13 +23,13 @@
       <h1>Welcome to the Javascript Quiz O' Doom</h1>
       <p>
         You have selected to attempt the Javascript Quiz O' Doom. You have 75
-        seconds to answer 5 hard-core javascript questions. If you fail at a
-        question, you will lose 10 seconds. Your score will be the time left
-        after you answer the last question. IF YOU DARE, click "Begin the Doom"
+        seconds to answer 6 very serious and hard-core javascript questions. If you fail at a
+        question, you will lose 10 seconds and be that much closer to impending DOOM! Your score will be the time left
+        after you answer the last question. IF YOU DARE, click "Begin the Doom" button
         when you are ready.
       </p>
       <div class="stylebtn">
-        <button id="begin-btn" class="begin-btn">Begin Your Doom</button>
+        <button id="begin-btn" class="begin-btn">Begin Your Race against DOOM</button>
       </div>
     </section>
 
@@ -41,9 +42,9 @@
         <button class="btn">Answer 3</button>
         <button class="btn">Answer 4</button>
       </div>
-      <h2 id="check-answer" class="correct-notcorrect hide"></h2>
+      <h2 id="check-answer" class="correct-wrong hide"></h2>
       <div class="stylebtn">
-        <button id="next-btn" class="next-btn hide">Next Impending Doom</button>
+        <button id="next-btn" class="next-btn hide">Next Question of Impending Doom</button>
       </div>
     </section>
 
@@ -60,15 +61,16 @@
           maxlength="3"
           placeholder="Enter your initials"
         />
-        <button id="submit-btn">Find your Score</button>
+        <button id="submit-btn">Click for your DOOM ranking</button>
       </form>
     </section>
 
-    <!-- High Scores Box-->
-    <section id="doomscore" class="doomscores-box hide">
-      <div id="high-scores">
+    <!-- High Scores Box, called after Javascript Quiz O Doom-->
+
+    <section id="doomscores" class="doomscores-box hide">
+      <div id="doom-scores">
         <h1 class="centered">The Javascript Quiz O' DOOM Leaders</h1>
-        <div id="highscore" class="highscore highscore-list"></div>
+        <div id="doomscore" class="doomscore doomscore-list"></div>
         <div class="stylebtn">
           <button id="restart-btn">DOOM YOURSELF AGAIN</button>
           <button id="clear-btn">Clear Scores</button>

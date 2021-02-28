@@ -29,9 +29,9 @@ var questions = [
     { 
         question: "What is the correct way to write a JavaScript array?", 
         answers: [
-            { text: "var fruit = (0:'orange', 1:'lemon', 2:'banana')", correct: false },
-            { text: "var fruit = ['orange', 'lemon', 'banana']", correct: true },
-            { text: "var fruit = (orange, lemon, banana)", correct: false },
+            { text: "var DOOM = (0:'death', 1:'destruction', 2:'madness')", correct: false },
+            { text: "var DOOM = ['death', 'destruction', 'madness']", correct: true },
+            { text: "var DOOM = (death, destruction, madness)", correct: false },
             { text: "None of the above", correct: false }
         ]
     },
@@ -45,7 +45,7 @@ var questions = [
         ]
     },
     { 
-        question: "JavaScrip is a _____-side programming language?", 
+        question: "JavaScript is a _____-side programming language?", 
         answers: [
             { text: "Client", correct: false },
             { text: "Server", correct: false },

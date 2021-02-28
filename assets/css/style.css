@@ -118,7 +118,7 @@
   }
   
   /* high scores section*/
-  .highscores {
+  .doomscores {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
