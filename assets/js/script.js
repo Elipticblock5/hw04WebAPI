@@ -1,6 +1,5 @@
-
 var timeLeft = 75;
-var timerID
+var timerID;
 var timerEl = document.getElementById("timer");
 var startButton = document.getElementById("begin-btn");
 var nextButton = document.getElementById("next-btn");
@@ -17,20 +16,18 @@ var restartDoom = document.getElementById("restart-btn");
 var scoreDoom = document.getElementById("player-score");
 var scores = JSON.parse(localStorage.getItem("scores")) || [];
 
-
-
-
-var randomQuestions, currentQuestionsIndex
+var randomQuestions, currentQuestions;
 
 //start button to get first question
-startButton.addEventListener("click", startGame);
+
+startButton.addEventListener("click", startDoom);
 nextButton.addEventListener("click", () => {
-  currentQuestionsIndex++
-  setNextQuestion()
+  currentQuestions++;
+  gotoNextQuestion();
 });
 
 //  doom timer
-function timeTick() {
+function countDown() {
   timeLeft--;
   timerEl.textContent = timeLeft + " until DOOM";
   if (timeLeft <= 0) {
@@ -40,52 +37,49 @@ function timeTick() {
 
 //  doom quiz starter
 
-function startGame() {
-  timerID = setInterval(timeTick, 1000);
+function startDoom() {
+  timerID = setInterval(countDown, 1000);
   startBoxEl.classList.add("hide");
-  randomQuestions = questions.sort(() => Math.random() - .5)
-  currentQuestionsIndex = 0
+  randomQuestions = questions.sort(() => Math.random() - 0.5);
+  currentQuestions = 0;
   questionBoxEl.classList.remove("hide");
 
-  timeTick();
-  setNextQuestion();
+  countDown();
+  gotoNextQuestion();
 }
 
 // next question function
 
-function setNextQuestion() {
+function gotoNextQuestion() {
   resetState();
-  showQuestion(randomQuestions[currentQuestionsIndex]);
+  showQuestion(randomQuestions[currentQuestions]);
 }
 
 // dynamic to display questions
 
 function showQuestion(question) {
-  questionEl.innerText = question.question
-  question.answers.forEach(answer => {
-    var button = document.createElement("button")
-    button.innerText = answer.text
-    button.classList.add("btn")
+  questionEl.innerText = question.question;
+  question.answers.forEach((answer) => {
+    var button = document.createElement("button");
+    button.innerText = answer.text;
+    button.classList.add("btn");
     if (answer.correct) {
-      button.dataset.correct = answer.correct
+      button.dataset.correct = answer.correct;
     }
 
-    button.addEventListener("click", selectAnswer)
-    answerButtonsEl.appendChild(button)
-    
+    button.addEventListener("click", selectAnswer);
+    answerButtonsEl.appendChild(button);
   });
-};
-
+}
 
 // reset questions
 function resetState() {
-  nextButton.classList.add("hide")
-  checkAnswerEl.classList.add("hide")
+  nextButton.classList.add("hide");
+  checkAnswerEl.classList.add("hide");
   while (answerButtonsEl.firstChild) {
-    answerButtonsEl.removeChild
-      (answerButtonsEl.firstChild)
+    answerButtonsEl.removeChild(answerButtonsEl.firstChild);
   }
-};
+}
 
 // answer selection function
 
@@ -95,140 +89,132 @@ function selectAnswer(e) {
 
   if (correct) {
     checkAnswerEl.innerHTML = "You got it right and avoided DOOM";
-
   } else {
     checkAnswerEl.innerHTML = "DOOM, you lose 10 seconds";
-     if (timeLeft <= 10) {
-       timeLeft = 0;
-
-     } else {
-       timeLeft -= 10;
-     }
+    if (timeLeft <= 10) {
+      timeLeft = 0;
+    } else {
+      timeLeft -= 10;
+    }
   }
 
-   Array.from(answerButtonsEl.children).forEach(button => {
-     setStatusClass(button, button.dataset.correct)
-   })
+  Array.from(answerButtonsEl.children).forEach((button) => {
+    correctWrongClass(button, button.dataset.correct);
+  });
 
-   if (randomQuestions.length > currentQuestionsIndex +1) {
-     nextButton.classList.remove("hide")
-     checkAnswerEl.classList.remove("hide")
-   } else {
-     startButton.classList.remove("hide")
-     saveScore();
-   }
-};
-
+  if (randomQuestions.length > currentQuestions + 1) {
+    nextButton.classList.remove("hide");
+    checkAnswerEl.classList.remove("hide");
+  } else {
+    startButton.classList.remove("hide");
+    saveScore();
+  }
+}
 
 // check answers, change button colors
-function setStatusClass(element, correct) {
-  clearStatusClass(element)
+function correctWrongClass(element, correct) {
+  clearStatusClass(element);
   if (correct) {
-      element.classList.add("correct");
+    element.classList.add("correct");
   } else {
-      element.classList.add("wrong");
+    element.classList.add("wrong");
   }
-};
+}
 
 // class clear
 
 function clearStatusClass(element) {
   element.classList.remove("correct");
   element.classList.remove("wrong");
-};
+}
 
-// saving score to local storag
+// saving score to local storage
 function saveScore() {
   clearInterval(timerID);
   timerEl.textContent = "Time: " + timeLeft;
   setTimeout(function () {
-      //localStorage.setItem("scores", JSON.stringify(scores));
-      questionBoxEl.classList.add("hide");
-      document.getElementById("score-box").classList.remove("hide");
-      document.getElementById("your-score").textContent = "Your final score is " + timeLeft;
+    //localStorage.setItem("scores", JSON.stringify(scores));
+    questionBoxEl.classList.add("hide");
+    document.getElementById("score-box").classList.remove("hide");
+    document.getElementById("your-score").textContent =
+      "Your final score is " + timeLeft;
+  }, 2000);
+}
 
-  }, 2000)
-};
 
 
-
+// loadscore function
 var loadScores = function () {
 
-  // get score from local storhage
 
   if (!savedScores) {
-      return false;
+    return false;
   }
 
-  // convert scores with JSON into array
+  // convert scores into array
 
   savedScores = JSON.parse(savedScores);
   var initials = document.querySelector("#initials-field").value;
   var newScore = {
-      score: timeLeft,
-      initials: initials
-  }
+    score: timeLeft,
+    initials: initials,
+  };
   savedScores.push(newScore);
-  console.log(savedScores)
+  console.log(savedScores);
 
-  savedScores.forEach(score => {
-      initialsBox.innerText = score.initials
-      scoreDoom.innerText = score.score
-  })
+  savedScores.forEach((score) => {
+    initialsBox.innerText = score.initials;
+    scoreDoom.innerText = score.score;
+  });
 };
 
-
-// show highschores
+// show high scores
 
 function showHighScores(initials) {
-  document.getElementById("highscores").classList.remove("hide")
+  document.getElementById("highscores").classList.remove("hide");
   document.getElementById("score-box").classList.add("hide");
   startBoxEl.classList.add("hide");
   questionBoxEl.classList.add("hide");
   if (typeof initials == "string") {
-      var score = {
-          initials, timeLeft
-      }
-      scores.push(score)
+    var score = {
+      initials,
+      timeLeft,
+    };
+    scores.push(score);
   }
 
   var highScoreEl = document.getElementById("highscore");
   highScoreEl.innerHTML = "";
 
   for (i = 0; i < scores.length; i++) {
-      var div1 = document.createElement("div");
-      div1.setAttribute("class", "name-div");
-      div1.innerText = scores[i].initials;
-      var div2 = document.createElement("div");
-      div2.setAttribute("class", "score-div");
-      div2.innerText = scores[i].timeLeft;
+    var div1 = document.createElement("div");
+    div1.setAttribute("class", "name-div");
+    div1.innerText = scores[i].initials;
+    var div2 = document.createElement("div");
+    div2.setAttribute("class", "score-div");
+    div2.innerText = scores[i].timeLeft;
 
-      highScoreEl.appendChild(div1);
-      highScoreEl.appendChild(div2);
+    highScoreEl.appendChild(div1);
+    highScoreEl.appendChild(div2);
   }
 
   localStorage.setItem("scores", JSON.stringify(scores));
+}
 
-};
-
-
-// high schore link load
+// high score  link load
 
 viewHighScores.addEventListener("click", showHighScores);
 
-
 submitButton.addEventListener("click", function (event) {
-    event.preventDefault()
-    var initials = document.querySelector("#initials-field").value;
-    showHighScores(initials);
+  event.preventDefault();
+  var initials = document.querySelector("#initials-field").value;
+  showHighScores(initials);
 });
-
 
 // reload the page
 restartDoom.addEventListener("click", function () {
-    window.location.reload();
+  window.location.reload();
 });
-
 
 // clear local storage
 
@@ -236,33 +222,3 @@ clearDoomBtn.addEventListener("click", function () {
   localStorage.clear();
   document.getElementById("highscores").innerHTML = "";
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

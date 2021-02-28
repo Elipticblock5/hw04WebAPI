@@ -4,6 +4,8 @@
     box-sizing: border-box;
   }
   
+  /* colors, using standard */ 
+  
   :root {
     --primary-color: orange;
     --secondary-color: red;
@@ -106,7 +108,7 @@
     margin: 10px 0;
   }
   
-  /* initials  */
+  /* initials box  */
   input[type="text"] {
     padding: 10px;
     margin: 8px 0;
@@ -115,7 +117,7 @@
     box-sizing: border-box;
   }
   
-  /* high scores*/
+  /* high scores section*/
   .highscores {
     display: flex;
     flex-wrap: wrap;
