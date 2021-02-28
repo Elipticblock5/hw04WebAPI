@@ -1,35 +1,35 @@
 var timeLeft = 75;
 var timerID;
-var timerEl = document.getElementById("timer");
-var startButton = document.getElementById("begin-btn");
-var nextButton = document.getElementById("next-btn");
+var doomTimerEl = document.getElementById("timer");
+var startDoomButton = document.getElementById("begin-btn");
+var nextDoomButton = document.getElementById("next-btn");
 var startBoxEl = document.getElementById("start-box");
 var questionBoxEl = document.getElementById("question-box");
 var questionEl = document.getElementById("question");
 var answerButtonsEl = document.getElementById("answer-buttons");
 var checkAnswerEl = document.getElementById("check-answer");
-var viewHighScores = document.getElementById("highscores");
-var submitButton = document.getElementById("submit-btn");
+var doomHighScores = document.getElementById("highscores");
+var submitDoom = document.getElementById("submit-btn");
 var clearDoomBtn = document.getElementById("clear-btn");
 var initialsBox = document.getElementById("player-name");
 var restartDoom = document.getElementById("restart-btn");
 var scoreDoom = document.getElementById("player-score");
 var scores = JSON.parse(localStorage.getItem("scores")) || [];
 
-var randomQuestions, currentQuestions;
+var doomQuestions, currentQuestions;
 
 //start button to get first question
 
-startButton.addEventListener("click", startDoom);
-nextButton.addEventListener("click", () => {
+startDoomButton.addEventListener("click", startDoom);
+nextDoomButton.addEventListener("click", () => {
   currentQuestions++;
-  gotoNextQuestion();
+  gotoNextDoom();
 });
 
 //  doom timer
-function countDown() {
+function doomTimer() {
   timeLeft--;
-  timerEl.textContent = timeLeft + " until DOOM";
+  doomTimerEl.textContent = timeLeft + " until DOOM";
   if (timeLeft <= 0) {
     saveScore();
   }
@@ -38,21 +38,21 @@ function countDown() {
 //  doom quiz starter
 
 function startDoom() {
-  timerID = setInterval(countDown, 1000);
+  timerID = setInterval(doomTimer, 1000);
   startBoxEl.classList.add("hide");
-  randomQuestions = questions.sort(() => Math.random() - 0.5);
+  doomQuestions = questions.sort(() => Math.random() - 0.5);
   currentQuestions = 0;
   questionBoxEl.classList.remove("hide");
 
-  countDown();
-  gotoNextQuestion();
+  doomTimer();
+  gotoNextDoom();
 }
 
 // next question function
 
-function gotoNextQuestion() {
+function gotoNextDoom() {
   resetState();
-  showQuestion(randomQuestions[currentQuestions]);
+  showQuestion(doomQuestions[currentQuestions]);
 }
 
 // dynamic to display questions
@@ -74,7 +74,7 @@ function showQuestion(question) {
 
 // reset questions
 function resetState() {
-  nextButton.classList.add("hide");
+  nextDoomButton.classList.add("hide");
   checkAnswerEl.classList.add("hide");
   while (answerButtonsEl.firstChild) {
     answerButtonsEl.removeChild(answerButtonsEl.firstChild);
@@ -102,18 +102,18 @@ function selectAnswer(e) {
     correctWrongClass(button, button.dataset.correct);
   });
 
-  if (randomQuestions.length > currentQuestions + 1) {
-    nextButton.classList.remove("hide");
+  if (doomQuestions.length > currentQuestions + 1) {
+    nextDoomButton.classList.remove("hide");
     checkAnswerEl.classList.remove("hide");
   } else {
-    startButton.classList.remove("hide");
+    startDoomButton.classList.remove("hide");
     saveScore();
   }
 }
 
-// check answers, change button colors
+// check answers for correct and wrong 
 function correctWrongClass(element, correct) {
-  clearStatusClass(element);
+  clearcorrectWrongClass(element);
   if (correct) {
     element.classList.add("correct");
   } else {
@@ -121,30 +121,35 @@ function correctWrongClass(element, correct) {
   }
 }
 
-// class clear
+// clearing correct or wrong
 
-function clearStatusClass(element) {
+function clearcorrectWrongClass(element) {
   element.classList.remove("correct");
   element.classList.remove("wrong");
 }
 
 // saving score to local storage
+
+
 function saveScore() {
   clearInterval(timerID);
-  timerEl.textContent = "Time: " + timeLeft;
+  doomTimerEl.textContent = "Time " + timeLeft;
   setTimeout(function () {
-    //localStorage.setItem("scores", JSON.stringify(scores));
+    // string the scores
     questionBoxEl.classList.add("hide");
     document.getElementById("score-box").classList.remove("hide");
     document.getElementById("your-score").textContent =
-      "Your final score is " + timeLeft;
+      "Your javaScript Quiz O' Doom score is: " + timeLeft;
   }, 2000);
 }
 
 
 
-// loadscore function
-var loadScores = function () {
+// load the score function
+
+
+
+var loadDoomScores = function () {
 
 
   if (!savedScores) {
@@ -170,7 +175,7 @@ var loadScores = function () {
 
 // show high scores
 
-function showHighScores(initials) {
+function showDoomScores(initials) {
   document.getElementById("highscores").classList.remove("hide");
   document.getElementById("score-box").classList.add("hide");
   startBoxEl.classList.add("hide");
@@ -203,12 +208,12 @@ function showHighScores(initials) {
 
 // high score  link load
 
-viewHighScores.addEventListener("click", showHighScores);
+doomHighScores.addEventListener("click", showDoomScores);
 
-submitButton.addEventListener("click", function (event) {
+submitDoom.addEventListener("click", function (event) {
   event.preventDefault();
   var initials = document.querySelector("#initials-field").value;
-  showHighScores(initials);
+  showDoomScores(initials);
 });
 
 // reload the page
