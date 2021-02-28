@@ -31,11 +31,15 @@ More CSS to add some pizzaz, only basic colors and centering right now.
 Diverted from mock-up to make similar but sillier version to mock up.
 
 
-![Screenshot](./assets/images/screenshot.jpg "Screenshot Quiz O' Doom")
+![Screenshot](/assets/images/screenshot.jpg "Screenshot Quiz O' Doom")
 
 GitHub Repo
 
 (https://github.com/Elipticblock5 "GitHub Repo")
+
+GitHub Active Page
+
+(https://elipticblock5.github.io/hw04WebAPI/ "Active Page")
 
 
 
