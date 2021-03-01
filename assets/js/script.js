@@ -1,3 +1,5 @@
+// used prettier to clean up code spacing
+
 var doomTimeLeft = 75;
 var doomTimerID;
 var doomTimerEl = document.getElementById("timer");
@@ -30,11 +32,14 @@ nextDoomButton.addEventListener("click", () => {
 
 function doomTimer() {
   doomTimeLeft--;
-  doomTimerEl.textContent = doomTimeLeft + " seconds until you are DOOMED...DOOMED I TELL YOU!!";
+  doomTimerEl.textContent =
+    doomTimeLeft + " seconds until you are DOOMED...DOOMED I TELL YOU!!";
   if (doomTimeLeft <= 0) {
     saveDoomScore();
   }
 }
+// want to add else statement here ot trigger message of DOOM, similar to module 4 timer solution could not get working
+
 
 //  DOOM quiz starter
 
@@ -89,9 +94,11 @@ function selectDoomAnswer(e) {
   var correct = doomSelection.dataset.correct;
 
   if (correct) {
-    checkAnswerEl.innerHTML = "You got it right and avoided impending MASSIVE DOOM!";
+    checkAnswerEl.innerHTML =
+      "You got it right and avoided impending MASSIVE DOOM!";
   } else {
-    checkAnswerEl.innerHTML = "WRONG!! You just DOOMED yourself! You're 10 seconds closer to DOOM!!";
+    checkAnswerEl.innerHTML =
+      "WRONG!! You just DOOMED yourself! You're 10 seconds closer to DOOM!!";
     if (doomTimeLeft <= 10) {
       doomTimeLeft = 0;
     } else {
@@ -112,7 +119,7 @@ function selectDoomAnswer(e) {
   }
 }
 
-// check answers for correct and wrong 
+// check answers for correct and wrong
 function correctWrongClass(element, correct) {
   clearcorrectWrongClass(element);
   if (correct) {
@@ -131,7 +138,6 @@ function clearcorrectWrongClass(element) {
 
 // saving score to local storage
 
-
 function saveDoomScore() {
   clearInterval(doomTimerID);
   doomTimerEl.textContent = "Time " + doomTimeLeft;
@@ -144,15 +150,9 @@ function saveDoomScore() {
   }, 2000);
 }
 
-
-
 // load the score function
 
-
-
 var loadDoomScores = function () {
-
-
   if (!savedScores) {
     return false;
   }
