@@ -33,6 +33,7 @@ function doomTimer() {
   doomTimerEl.textContent = doomTimeLeft + " seconds until you are DOOMED...DOOMED I TELL YOU!!";
   if (doomTimeLeft <= 0) {
     saveDoomScore();
+    window.alert("YOU REACHED DOOM!!")
   }
 }
 
