@@ -1,32 +1,38 @@
+//setting initial variables baed on hmtl tags.
+
 var doomTimeLeft = 75;
 var doomTimerID;
-var doomTimerEl = document.getElementById("timer");
-var startDoomButton = document.getElementById("begin-btn");
-var nextDoomButton = document.getElementById("next-btn");
-var startDoomBoxEl = document.getElementById("doom-start-box");
-var doomQuestionBoxEl = document.getElementById("doom-question-box");
-var questionEl = document.getElementById("question");
-var doomAnswersEl = document.getElementById("answer-buttons");
-var checkAnswerEl = document.getElementById("check-answer");
-var doomHighScores = document.getElementById("doomscores");
-var submitDoom = document.getElementById("submit-btn");
-var clearDoomBtn = document.getElementById("clear-btn");
-var doomInitials = document.getElementById("player-name");
-var restartDoom = document.getElementById("restart-btn");
-var scoreDoom = document.getElementById("player-score");
+var doomTimerEl = $('#timer');
+var startDoomButton = $('#begin-btn');
+var nextDoomButton = $('#next-btn');
+var startDoomBoxEl = $('#doom-start-box');
+var doomQuestionBoxEl = $('#doom-question-box');
+var questionEl = $('#question');
+var doomAnswersEl = $('#answer-buttons');
+var checkAnswerEl = $('#check-answer');
+var doomHighScores = $('#doomscores');
+var submitDoom = $('#submit-btn');
+var clearDoomBtn = $('#clear-btn');
+var doomInitials = $('#player-name');
+var restartDoom = $('#restart-btn');
+var scoreDoom = $('#player-score');
+
+//parsing scores, found answer https://www.w3schools.com/jsref/met_storage_getitem.asp
 var scores = JSON.parse(localStorage.getItem("scores")) || [];
 
 var doomQuestions, currentDoomQuestions;
 
 //start button to get first question
 
-startDoomButton.addEventListener("click", startDoom);
-nextDoomButton.addEventListener("click", () => {
+
+$(document).ready(function() {
+  $("startDoomButton").click(startDoom());
+  $("nextDoomButton").click {
   currentDoomQuestions++;
   gotoNextDoom();
-});
+};
 
-//  DOOM timer
+//  DOOM timer functions, counts down, alert at 0 seconds left.
 
 function doomTimer() {
   doomTimeLeft--;
@@ -36,6 +42,8 @@ function doomTimer() {
     window.alert("YOU REACHED DOOM!!")
   }
 }
+
+
 
 //  DOOM quiz starter
 
