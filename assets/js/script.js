@@ -23,7 +23,7 @@ var doomQuestions, currentDoomQuestions;
 //start button to get first question
 
 startDoomButton.addEventListener("click", startDoom);
-nextDoomButton.addEventListener("click", () => {
+nextDoomButton.addEventListener("click", function () {
   currentDoomQuestions++;
   gotoNextDoom();
 });
@@ -35,6 +35,7 @@ function doomTimer() {
   doomTimerEl.textContent =
     doomTimeLeft + " seconds until you are DOOMED...DOOMED I TELL YOU!!";
   if (doomTimeLeft <= 0) {
+    window.alert("HAHA,.....YOU HAVE MET YOUR DOOM!!!")
     saveDoomScore();
   }
 }
@@ -44,8 +45,17 @@ function doomTimer() {
 //  DOOM quiz starter
 
 function startDoom() {
+
+  //starts teh timer by second
   doomTimerID = setInterval(doomTimer, 1000);
+
+  //pulls up the question box into HTML when quiz starts
+
   startDoomBoxEl.classList.add("hide");
+
+
+//this sorts the array, https://forum.freecodecamp.org/t/how-does-math-random-work-to-sort-an-array/151540
+
   doomQuestions = questions.sort(() => Math.random() - 0.5);
   currentDoomQuestions = 0;
   doomQuestionBoxEl.classList.remove("hide");
@@ -54,16 +64,16 @@ function startDoom() {
   gotoNextDoom();
 }
 
-// next doom question function
+// next doom question function, resets 
 
 function gotoNextDoom() {
   resetDoom();
-  showQuestion(doomQuestions[currentDoomQuestions]);
+  showDoomQuestion(doomQuestions[currentDoomQuestions]);
 }
 
-// dynamic to display questions and next button
+// dynamic to display questions after clickig next button
 
-function showQuestion(question) {
+function showDoomQuestion(question) {
   questionEl.innerText = question.question;
   question.answers.forEach((answer) => {
     var button = document.createElement("button");
@@ -72,11 +82,13 @@ function showQuestion(question) {
     if (answer.correct) {
       button.dataset.correct = answer.correct;
     }
+//goes to next even after clicking answer button
 
     button.addEventListener("click", selectDoomAnswer);
     doomAnswersEl.appendChild(button);
   });
 }
+
 
 // reset questions
 function resetDoom() {
@@ -88,11 +100,15 @@ function resetDoom() {
 }
 
 // answer selection correct, lose 10 seconds if wrong.
+// event listener, using default (e) for eveent
 
 function selectDoomAnswer(e) {
   var doomSelection = e.target;
   var correct = doomSelection.dataset.correct;
 
+  //listens to answer, if correct alerts answer is right
+
+  //if wrong then deduct 10 seconds from timer
   if (correct) {
     checkAnswerEl.innerHTML =
       "You got it right and avoided impending MASSIVE DOOM!";
@@ -105,6 +121,9 @@ function selectDoomAnswer(e) {
       doomTimeLeft -= 10;
     }
   }
+
+  // using arrow functions could also write function correctWrongClass
+
 
   Array.from(doomAnswersEl.children).forEach((button) => {
     correctWrongClass(button, button.dataset.correct);
@@ -161,11 +180,13 @@ var loadDoomScores = function () {
 
   savedScores = JSON.parse(savedScores);
   var initials = document.querySelector("#initials-field").value;
-  var newScore = {
+  var newDoomScore = {
     score: doomTimeLeft,
     initials: initials,
   };
-  savedScores.push(newScore);
+
+  //pushes new score for 
+  savedScores.push(newDoomScore);
   console.log(savedScores);
 
   savedScores.forEach((score) => {
@@ -174,7 +195,7 @@ var loadDoomScores = function () {
   });
 };
 
-// show high scores
+// show high scores fumction
 
 function showDoomScores(initials) {
   document.getElementById("doomscores").classList.remove("hide");
@@ -192,18 +213,28 @@ function showDoomScores(initials) {
   var highDoomScoreEl = document.getElementById("doomscore");
   highDoomScoreEl.innerHTML = "";
 
+  //creates save boces based on conditions of time, win, lose
+  
+ 
+
   for (i = 0; i < scores.length; i++) {
     var div1 = document.createElement("div");
+
+    //div 1 scores, initials
     div1.setAttribute("class", "name-div");
     div1.innerText = scores[i].initials;
+
+ //div 2 scores, time left 
     var div2 = document.createElement("div");
     div2.setAttribute("class", "score-div");
     div2.innerText = scores[i].doomTimeLeft;
 
+
+    //appens high score box, based on above
     highDoomScoreEl.appendChild(div1);
     highDoomScoreEl.appendChild(div2);
   }
-
+//sets scores to local storage 
   localStorage.setItem("scores", JSON.stringify(scores));
 }
 
@@ -211,18 +242,20 @@ function showDoomScores(initials) {
 
 doomHighScores.addEventListener("click", showDoomScores);
 
+//submit scores sections, on click event to save initial for high score list
+
 submitDoom.addEventListener("click", function (event) {
   event.preventDefault();
   var initials = document.querySelector("#initials-field").value;
   showDoomScores(initials);
 });
 
-// reload the page
+// reload the page on click function
 restartDoom.addEventListener("click", function () {
   window.location.reload();
 });
 
-// clear local storage
+// clear local storage to reset
 
 clearDoomBtn.addEventListener("click", function () {
   localStorage.clear();
